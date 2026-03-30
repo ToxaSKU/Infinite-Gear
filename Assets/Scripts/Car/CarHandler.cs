@@ -37,7 +37,7 @@ public class CarHandler : MonoBehaviour
     void Update()
     {
         //Rotate car model when 'turing'
-        gameModel.transform.rotation = Quaternion.Euler(0, rb.velocity.x * 5.0);
+        gameModel.transform.rotation = Quaternion.Euler(0, rb.velocity.x * 5,0);
 
 
     }
@@ -107,7 +107,7 @@ public class CarHandler : MonoBehaviour
             normalizedX = Mathf.Clamp(normalizedX, -1.0f, 1.0f);
 
             //Make sure we stay within the turn speed limit
-            rb.velocity.x = new Vector3(normalizedX * maxSteerVelocity, 0, rd.velocity.z);
+            rb.velocity = new Vector3(normalizedX * maxSteerVelocity, 0, rb.velocity.z);
 
 
         }
