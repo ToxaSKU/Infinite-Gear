@@ -356,8 +356,12 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.62f2/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.62f2/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/NewBehaviourScript.cs"
+"Assets/Scripts/Car/CarController.cs"
 "Assets/Scripts/Car/CarHandler.cs"
 "Assets/Scripts/Car/InputHandler.cs"
+"Assets/Scripts/Endless/Endless.cs"
+"Assets/Scripts/Endless/EndlessLevel.cs"
+"Assets/Scripts/Endless/RandomObject.cs"
 -langversion:9.0
 /deterministic
 /optimize+

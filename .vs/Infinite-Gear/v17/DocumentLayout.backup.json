@@ -3,7 +3,19 @@
   "WorkspaceRootPath": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|c:\\users\\anton\\desktop\\infinite gear.2\\infinite-gear\\assets\\scripts\\car\\carhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|c:\\users\\anton\\desktop\\infinite gear.2\\infinite-gear\\assets\\scripts\\endless\\endless.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\endless\\endless.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\assets\\scripts\\endless\\endlesslevel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\endless\\endlesslevel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\assets\\scripts\\car\\carcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\car\\carcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\assets\\scripts\\car\\carhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\car\\carhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -14,20 +26,57 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EndlessLevel.cs",
+              "DocumentMoniker": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\Assets\\Scripts\\Endless\\EndlessLevel.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Endless\\EndlessLevel.cs",
+              "ToolTip": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\Assets\\Scripts\\Endless\\EndlessLevel.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Endless\\EndlessLevel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-05T19:29:23.492Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Endless.cs",
+              "DocumentMoniker": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\Assets\\Scripts\\Endless\\Endless.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Endless\\Endless.cs",
+              "ToolTip": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\Assets\\Scripts\\Endless\\Endless.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Endless\\Endless.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAgwC4AAABkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-02T14:02:38.956Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CarController.cs",
+              "DocumentMoniker": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\Assets\\Scripts\\Car\\CarController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Car\\CarController.cs",
+              "ToolTip": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\Assets\\Scripts\\Car\\CarController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Car\\CarController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-05T19:22:43.925Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "CarHandler.cs",
               "DocumentMoniker": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\Assets\\Scripts\\Car\\CarHandler.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Car\\CarHandler.cs",
               "ToolTip": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\Assets\\Scripts\\Car\\CarHandler.cs",
               "RelativeToolTip": "Assets\\Scripts\\Car\\CarHandler.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAQwAwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABwAAAAAAAAAAAAqwIQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-30T14:25:18.727Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-30T14:25:18.727Z"
             }
           ]
         }

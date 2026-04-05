@@ -13,14 +13,14 @@ public class CarHandler : MonoBehaviour
 
 
     //Max values
-    float maxSteerVelocity = 2;
-    float maxForwardVelocity = 30;
+    float maxSteerVelocity = 12;
+    float maxForwardVelocity = 20;
 
 
     //Multipliers
-    float accelerationMultiplier = 3;
+    float accelerationMultiplier = 5;
     float breakstionMultiplier = 15;
-    float steeringMultiplier = 5;
+    float steeringMultiplier = 10;
 
     //Input
     Vector2 input = Vector2.zero;
@@ -30,14 +30,14 @@ public class CarHandler : MonoBehaviour
 
     void Start()
     {
-
+        gameModel.transform.localRotation = Quaternion.identity;
     }
 
     // Update is called once per frame
     void Update()
     {
         //Rotate car model when 'turing'
-        gameModel.transform.rotation = Quaternion.Euler(0, rb.velocity.x * 5,0);
+        gameModel.transform.rotation = Quaternion.Euler(0, rb.velocity.x * 5, 0);
 
 
     }
@@ -121,6 +121,7 @@ public class CarHandler : MonoBehaviour
         }
 
 
+
     }
 
     public void SetInput(Vector2 inputVector)
@@ -130,4 +131,4 @@ public class CarHandler : MonoBehaviour
         input = inputVector;
     }
 
- }
+}
