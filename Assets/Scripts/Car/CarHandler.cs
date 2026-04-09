@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class CarHandler : MonoBehaviour
 {
     [SerializeField]
@@ -11,11 +10,9 @@ public class CarHandler : MonoBehaviour
     [SerializeField]
     Transform gameModel;
 
-
     //Max values
     float maxSteerVelocity = 12;
     float maxForwardVelocity = 20;
-
 
     //Multipliers
     float accelerationMultiplier = 5;
@@ -25,21 +22,15 @@ public class CarHandler : MonoBehaviour
     //Input
     Vector2 input = Vector2.zero;
 
-    //Start is called before the first frsme update
-
-
     void Start()
     {
         gameModel.transform.localRotation = Quaternion.identity;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //Rotate car model when 'turing'
+        //Rotate car model when 'turning'
         gameModel.transform.rotation = Quaternion.Euler(0, rb.velocity.x * 5, 0);
-
-
     }
 
     private void FixedUpdate()
@@ -56,18 +47,16 @@ public class CarHandler : MonoBehaviour
         if (input.y < 0)
         {
             Brake();
-
         }
 
         Steer();
 
-        //Force the car not to go backwards
-        if (rb.velocity.z <= 0)
-            rb.velocity = Vector3.zero;
-
-
-
+        //Force the car not to go backwards - ИСПРАВЛЕНО
+        // Теперь блокируется только движение НАЗАД, а не вперёд
+        if (rb.velocity.z < 0)
+            rb.velocity = new Vector3(rb.velocity.x, 0, 0);
     }
+
     void Accelerate()
     {
         rb.drag = 0;
@@ -81,7 +70,7 @@ public class CarHandler : MonoBehaviour
 
     void Brake()
     {
-        //Don't brake unless we are going forward - Не тормозит пока движемся вперед
+        //Don't brake unless we are going forward
         if (rb.velocity.z <= 0)
         {
             return;
@@ -108,27 +97,31 @@ public class CarHandler : MonoBehaviour
 
             //Make sure we stay within the turn speed limit
             rb.velocity = new Vector3(normalizedX * maxSteerVelocity, 0, rb.velocity.z);
-
-
         }
-
         else
         {
             //Auto center car
             rb.velocity = Vector3.Lerp(rb.velocity, new Vector3(0, 0, rb.velocity.z), Time.fixedDeltaTime * 3);
-
-
         }
-
-
-
     }
 
     public void SetInput(Vector2 inputVector)
     {
         inputVector.Normalize();
-
         input = inputVector;
     }
 
+    public void SetMaxSpeed(float speed)
+    {
+        maxForwardVelocity = speed;
+    }
+    public float GetMaxSpeed()
+    {
+        return maxForwardVelocity;
+    }
+
+    public float GetCurrentSpeed()
+    {
+        return rb.velocity.z;
+    }
 }

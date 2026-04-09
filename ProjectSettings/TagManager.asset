@@ -3,15 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - CarAI
+  - OppositeAI
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - OppositeTraffic
   - Water
   - UI
-  - 
+  - Car
   - 
   - 
   - 
