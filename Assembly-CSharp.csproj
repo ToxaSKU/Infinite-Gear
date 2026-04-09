@@ -63,6 +63,16 @@
     <Compile Include="Assets\Scripts\Car\CarHandler.cs" />
     <Compile Include="Assets\NewBehaviourScript.cs" />
     <Compile Include="Assets\Scripts\Car\InputHandler.cs" />
+    <Compile Include="Assets\Scripts\OppositeTraffic.cs" />
+    <Compile Include="Assets\Scripts\AI\OppositeAIHandler.cs" />
+    <Compile Include="Assets\Scripts\Endless\RandomObject.cs" />
+    <Compile Include="Assets\Scripts\Car\CrashHandler.cs" />
+    <Compile Include="Assets\Scripts\AI\AIHendler.cs" />
+    <Compile Include="Assets\Scripts\Car\CarController.cs" />
+    <Compile Include="Assets\Scripts\Endless\EndlessLevel.cs" />
+    <Compile Include="Assets\Scripts\AI\OppositeAlHandler.cs" />
+    <Compile Include="Assets\Scripts\AI\AICarSpawn.cs" />
+    <Compile Include="Assets\Scripts\Endless\Endless.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
