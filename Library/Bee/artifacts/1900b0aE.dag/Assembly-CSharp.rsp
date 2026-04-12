@@ -365,7 +365,6 @@
 "Assets/Scripts/Car/CrashHandler.cs"
 "Assets/Scripts/Car/InputHandler.cs"
 "Assets/Scripts/Car/PlayerCollision.cs"
-"Assets/Scripts/Car/WheelRotation.cs"
 "Assets/Scripts/Endless/Endless.cs"
 "Assets/Scripts/Endless/EndlessLevel.cs"
 "Assets/Scripts/Endless/RandomObject.cs"
