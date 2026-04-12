@@ -31,6 +31,21 @@ public class CarHandler : MonoBehaviour
     {
         //Rotate car model when 'turning'
         gameModel.transform.rotation = Quaternion.Euler(0, rb.velocity.x * 5, 0);
+
+        // Реальная скорость в км/ч
+        float speedKmh = GetComponent<Rigidbody>().velocity.magnitude * 3.6f;
+
+        if (speedKmh > 5) // Логируем только когда едем
+        {
+            Debug.Log($"Скорость: {speedKmh:F0} км/ч | Вперед/назад: {Input.GetAxis("Vertical"):F2}");
+        }
+
+        // Отладка поворота
+        float turn = Input.GetAxis("Horizontal");
+        if (Mathf.Abs(turn) > 0.1f)
+        {
+            Debug.Log($"Поворот: {turn:F2}, угол машины: {transform.eulerAngles.y:F1}");
+        }
     }
 
     private void FixedUpdate()
@@ -123,5 +138,25 @@ public class CarHandler : MonoBehaviour
     public float GetCurrentSpeed()
     {
         return rb.velocity.z;
+    }
+
+    void OnGUI()
+    {
+        GUILayout.BeginArea(new Rect(10, 10, 250, 200));
+        GUILayout.Box("=== УПРАВЛЕНИЕ ===");
+
+        GUILayout.Label($"W/S или ?/?: {Input.GetAxis("Vertical"):F2}");
+        GUILayout.Label($"A/D или ?/?: {Input.GetAxis("Horizontal"):F2}");
+
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            float speed = rb.velocity.magnitude * 3.6f;
+            GUILayout.Label($"Скорость: {speed:F0} км/ч");
+            GUILayout.Label($"Скорость (м/с): {rb.velocity.magnitude:F1}");
+        }
+
+        GUILayout.Label($"Позиция Z: {transform.position.z:F0}");
+        GUILayout.EndArea();
     }
 }
