@@ -139,24 +139,4 @@ public class CarHandler : MonoBehaviour
     {
         return rb.velocity.z;
     }
-
-    void OnGUI()
-    {
-        GUILayout.BeginArea(new Rect(10, 10, 250, 200));
-        GUILayout.Box("=== УПРАВЛЕНИЕ ===");
-
-        GUILayout.Label($"W/S или ?/?: {Input.GetAxis("Vertical"):F2}");
-        GUILayout.Label($"A/D или ?/?: {Input.GetAxis("Horizontal"):F2}");
-
-        Rigidbody rb = GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            float speed = rb.velocity.magnitude * 3.6f;
-            GUILayout.Label($"Скорость: {speed:F0} км/ч");
-            GUILayout.Label($"Скорость (м/с): {rb.velocity.magnitude:F1}");
-        }
-
-        GUILayout.Label($"Позиция Z: {transform.position.z:F0}");
-        GUILayout.EndArea();
-    }
 }
