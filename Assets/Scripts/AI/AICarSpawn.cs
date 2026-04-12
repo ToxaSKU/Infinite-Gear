@@ -193,4 +193,28 @@ public class AICarSpawn : MonoBehaviour
             }
         }
     }
+
+    void OnGUI()
+    {
+        GUILayout.BeginArea(new Rect(10, 10, 280, 180));
+        GUILayout.Box("=== СИСТЕМА СПАВНА AI ===");
+
+        int active = GetActiveCarsCount();
+        float timeToNext = 2 - (Time.time - timeLastCarSpawned);
+
+        GUILayout.Label($"Активных AI машин: {active}/{carAIPool.Length}");
+        GUILayout.Label($"Свободно машин: {carAIPool.Length - active}");
+        GUILayout.Label($"До след. спавна: {Mathf.Max(0, timeToNext):F1} сек");
+        GUILayout.Label($"Позиция игрока Z: {playerCarTransform.position.z:F0}");
+        GUILayout.Label($"Зона спавна Z: {playerCarTransform.position.z + 100:F0}");
+
+        if (active == carAIPool.Length)
+        {
+            GUI.color = Color.red;
+            GUILayout.Label("⚠️ ПУЛ ЗАПОЛНЕН! Нет свободных машин");
+            GUI.color = Color.white;
+        }
+
+        GUILayout.EndArea();
+    }
 }
