@@ -1,21 +1,24 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AIHandler : MonoBehaviour
 {
-    [SerializeField]
-    CarHandler carHandler;
+    [SerializeField] CarHandler carHandler;
+    [SerializeField] MeshCollider meshCollider; // опционально, для отключения при проверках
 
-    [SerializeField]
-    LayerMask otherCarsLayerMask;
+    [Header("Distance Settings")]
+    [SerializeField] float targetFollowDistance = 8f;   // желаемая дистанция до впереди идущей машины
+    [SerializeField] float minBrakeDistance = 4f;       // при такой дистанции начинаем тормозить
+    [SerializeField] float emergencyDistance = 2f;      // аварийное торможение (почти останавливаемся)
+    [SerializeField] float maxSpeed = 12f;              // максимальная скорость (км/ч или условно)
+    [SerializeField] float checkInterval = 0.1f;
 
-    [SerializeField]
-    MeshCollider meshCollider;
+    private float currentGas = 1f;
+    private float distanceToCarAhead = Mathf.Infinity;
 
-    RaycastHit[] raycastHits = new RaycastHit[1];
-    bool isCarAhead = false;
-
-    WaitForSeconds wait = new WaitForSeconds(0.2f);
+    // Статический список всех активных AI машин (для перекрёстных проверок)
+    private static List<AIHandler> allAICars = new List<AIHandler>();
 
     private void Awake()
     {
@@ -26,62 +29,107 @@ public class AIHandler : MonoBehaviour
         }
     }
 
-    void Start()
+    private void OnEnable()
     {
-        carHandler.SetMaxSpeed(Random.Range(4, 8));
-        StartCoroutine(UpdateLessOftenCO());
+        allAICars.Add(this);
+        if (carHandler != null)
+            carHandler.SetMaxSpeed(maxSpeed);
+        currentGas = 1f;
     }
 
-    IEnumerator UpdateLessOftenCO()
+    private void OnDisable()
     {
+        allAICars.Remove(this);
+    }
+
+    void Start()
+    {
+        StartCoroutine(CheckDistanceRoutine());
+    }
+
+    IEnumerator CheckDistanceRoutine()
+    {
+        WaitForSeconds wait = new WaitForSeconds(checkInterval);
         while (true)
         {
             yield return wait;
-            isCarAhead = CheckIfOtherCarsIsAhead();
+            CheckDistanceToCarAhead();
         }
     }
 
-    bool CheckIfOtherCarsIsAhead()
+    void CheckDistanceToCarAhead()
     {
-        meshCollider.enabled = false;
+        float closestDistance = Mathf.Infinity;
+        float myZ = transform.position.z;
+        float myX = transform.position.x;
 
-        int numberOfHits = Physics.BoxCastNonAlloc(
-            transform.position,
-            Vector3.one * 0.5f,
-            transform.forward,
-            raycastHits,
-            Quaternion.identity,
-            3f,
-            otherCarsLayerMask
-        );
+        foreach (AIHandler other in allAICars)
+        {
+            if (other == this) continue;
+            if (!other.gameObject.activeInHierarchy) continue;
 
-        meshCollider.enabled = true;
+            float otherZ = other.transform.position.z;
+            float otherX = other.transform.position.x;
 
-        if (numberOfHits > 0)
-            return true;
+            // Машина должна быть ВПЕРЕДИ (по Z) и не дальше 30 метров
+            if (otherZ > myZ && otherZ - myZ < 30f)
+            {
+                // Проверяем, что машина примерно на той же полосе (разница по X не более 2 метров)
+                if (Mathf.Abs(myX - otherX) < 2.5f)
+                {
+                    float dist = otherZ - myZ;
+                    if (dist < closestDistance)
+                        closestDistance = dist;
+                }
+            }
+        }
 
-        return false;
+        distanceToCarAhead = closestDistance;
+        UpdateGasBasedOnDistance();
+    }
+
+    void UpdateGasBasedOnDistance()
+    {
+        if (distanceToCarAhead < emergencyDistance)
+        {
+            // Аварийная ситуация – почти стоим
+            currentGas = 0.1f;
+        }
+        else if (distanceToCarAhead < minBrakeDistance)
+        {
+            // Плавное торможение: чем ближе, тем меньше газа
+            float t = (distanceToCarAhead - emergencyDistance) / (minBrakeDistance - emergencyDistance);
+            currentGas = Mathf.Lerp(0.2f, 1f, t);
+        }
+        else if (distanceToCarAhead < targetFollowDistance)
+        {
+            // Немного притормаживаем, чтобы держать дистанцию
+            currentGas = 0.7f;
+        }
+        else
+        {
+            // Свободная дорога
+            currentGas = 1f;
+        }
+
+        currentGas = Mathf.Clamp(currentGas, 0.1f, 1f);
     }
 
     void Update()
     {
-        float accelerationInput = 1.0f;
-
-        if (isCarAhead)
-            accelerationInput = -0.5f;
-
-        float steerInput = 0f;
-
-        steerInput = Mathf.Clamp(steerInput, -1.0f, 1.0f);
-
-        carHandler.SetInput(new Vector2(steerInput, accelerationInput));
+        if (carHandler != null)
+            carHandler.SetInput(new Vector2(0f, currentGas));
     }
 
-    private void OnEnable()
+    // Для отладки в редакторе
+    private void OnDrawGizmosSelected()
     {
-        if (!CompareTag("Player"))
+        if (!Application.isPlaying) return;
+        if (distanceToCarAhead < 15f)
         {
-            carHandler.SetMaxSpeed(Random.Range(8, 16));
+            Gizmos.color = Color.Lerp(Color.red, Color.green, distanceToCarAhead / 15f);
+            Gizmos.DrawLine(transform.position, transform.position + transform.forward * distanceToCarAhead);
+            Gizmos.DrawWireSphere(transform.position + transform.forward * distanceToCarAhead, 1f);
         }
     }
 }

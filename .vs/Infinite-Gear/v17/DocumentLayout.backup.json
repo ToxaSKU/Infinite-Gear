@@ -3,28 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\assets\\scripts\\ai\\aicarspawn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|c:\\users\\anton\\desktop\\infinite gear.2\\infinite-gear\\assets\\scripts\\ai\\aicarspawn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ai\\aicarspawn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|c:\\users\\anton\\desktop\\infinite gear.2\\infinite-gear\\assets\\scripts\\ai\\oppositealhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ai\\oppositealhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\assets\\scripts\\car\\playercollision.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\car\\playercollision.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\assets\\scripts\\ai\\oppositeaihandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ai\\oppositeaihandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\assets\\scripts\\car\\wheelrotation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\car\\wheelrotation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\assets\\scripts\\ai\\aihendler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ai\\aihendler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\assets\\scripts\\oppositetraffic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\oppositetraffic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\assets\\scripts\\car\\carhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\car\\carhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\assets\\scripts\\ai\\oppositeaihandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ai\\oppositeaihandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\assets\\scripts\\ai\\oppositealhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ai\\oppositealhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\assets\\scripts\\oppositetraffic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\oppositetraffic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{654447E5-8504-501D-5523-62D36213FA28}|Assembly-CSharp.csproj|C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\assets\\scripts\\endless\\randomobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -62,11 +70,35 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "WheelRotation.cs",
+              "DocumentMoniker": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\Assets\\Scripts\\Car\\WheelRotation.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Car\\WheelRotation.cs",
+              "ToolTip": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\Assets\\Scripts\\Car\\WheelRotation.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Car\\WheelRotation.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAIBJwCoAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T13:34:42.104Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "PlayerCollision.cs",
+              "DocumentMoniker": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\Assets\\Scripts\\Car\\PlayerCollision.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Car\\PlayerCollision.cs",
+              "ToolTip": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\Assets\\Scripts\\Car\\PlayerCollision.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Car\\PlayerCollision.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwCEAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T13:24:16.464Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "OppositeAlHandler.cs",
               "DocumentMoniker": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\Assets\\Scripts\\AI\\OppositeAlHandler.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\AI\\OppositeAlHandler.cs",
@@ -74,12 +106,11 @@
               "RelativeToolTip": "Assets\\Scripts\\AI\\OppositeAlHandler.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-09T14:03:08.954Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-09T14:03:08.954Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "OTS.cs",
               "DocumentMoniker": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\Assets\\Scripts\\AI\\OTS.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\AI\\OTS.cs",
@@ -91,19 +122,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "OppositeAIHandler.cs",
               "DocumentMoniker": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\Assets\\Scripts\\AI\\OppositeAIHandler.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\AI\\OppositeAIHandler.cs",
               "ToolTip": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\Assets\\Scripts\\AI\\OppositeAIHandler.cs",
               "RelativeToolTip": "Assets\\Scripts\\AI\\OppositeAIHandler.cs",
-              "ViewState": "AgIAAJYAAAAAAAAAAAAswMYAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAH4AAAAAAAAAAAAswLUAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-09T13:09:43.715Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "OppositeTraffic.cs",
               "DocumentMoniker": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\Assets\\Scripts\\OppositeTraffic.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\OppositeTraffic.cs",
@@ -115,7 +146,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "CrashHandler.cs",
               "DocumentMoniker": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\Assets\\Scripts\\Car\\CrashHandler.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Car\\CrashHandler.cs",
@@ -133,7 +164,7 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\AI\\AIHendler.cs",
               "ToolTip": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\Assets\\Scripts\\AI\\AIHendler.cs",
               "RelativeToolTip": "Assets\\Scripts\\AI\\AIHendler.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAQwCAAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAUwIYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-07T19:20:14.295Z"
             },
@@ -145,14 +176,14 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\AI\\AICarSpawn.cs",
               "ToolTip": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\Assets\\Scripts\\AI\\AICarSpawn.cs",
               "RelativeToolTip": "Assets\\Scripts\\AI\\AICarSpawn.cs",
-              "ViewState": "AgIAAJMAAAAAAAAAAAAswMMAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAANMAAAAAAAAAAAAAAPoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-07T17:41:11.046Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "RandomObject.cs",
               "DocumentMoniker": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\Assets\\Scripts\\Endless\\RandomObject.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Endless\\RandomObject.cs",
@@ -164,7 +195,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "EndlessLevel.cs",
               "DocumentMoniker": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\Assets\\Scripts\\Endless\\EndlessLevel.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Endless\\EndlessLevel.cs",
@@ -176,7 +207,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "Endless.cs",
               "DocumentMoniker": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\Assets\\Scripts\\Endless\\Endless.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Endless\\Endless.cs",
@@ -188,7 +219,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "CarController.cs",
               "DocumentMoniker": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\Assets\\Scripts\\Car\\CarController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Car\\CarController.cs",
@@ -200,19 +231,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "CarHandler.cs",
               "DocumentMoniker": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\Assets\\Scripts\\Car\\CarHandler.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Car\\CarHandler.cs",
               "ToolTip": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\Assets\\Scripts\\Car\\CarHandler.cs",
               "RelativeToolTip": "Assets\\Scripts\\Car\\CarHandler.cs",
-              "ViewState": "AgIAAFgAAAAAAAAAAAAkwH0AAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAGMAAAAAAAAAAAAswIwAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-30T14:25:18.727Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "InputHandler.cs",
               "DocumentMoniker": "C:\\Users\\anton\\Desktop\\Infinite Gear.2\\Infinite-Gear\\Assets\\Scripts\\Car\\InputHandler.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Car\\InputHandler.cs",
