@@ -5,8 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class InputHandler : MonoBehaviour
 {
-    [SerializeField]
-    CarHandler carHandler;
+    [SerializeField] CarHandler carHandler;
 
     private void Awake()
     {
@@ -28,8 +27,10 @@ public class InputHandler : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
+            // Restore time scale
+            Time.timeScale = 1.0f;
+
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
-
 }

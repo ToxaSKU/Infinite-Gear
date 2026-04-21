@@ -10,6 +10,19 @@ public class CarHandler : MonoBehaviour
     [SerializeField]
     Transform gameModel;
 
+    [Header("SFX")]
+    [SerializeField]
+    AudioSource carEngineAS;
+
+    [SerializeField]
+    AnimationCurve carPitchAnimationCurve;
+
+    [Header("Crash Settings")]
+    [SerializeField]
+    float crashSpeedThreshold = 3f;
+    [SerializeField]
+    float crashAudioFadeTime = 0.5f;
+
     //Max values
     float maxSteerVelocity = 12;
     float maxForwardVelocity = 20;
@@ -22,35 +35,60 @@ public class CarHandler : MonoBehaviour
     //Input
     Vector2 input = Vector2.zero;
 
+    bool isPlayer = true;
+    private bool audioInitialized = false;
+    private bool isCrashed = false;
+    private float originalVolume;
+
     void Start()
     {
         gameModel.transform.localRotation = Quaternion.identity;
+        isPlayer = CompareTag("Player");
+
+        if (isPlayer)
+        {
+            InitCarAudio();
+        }
+    }
+
+    void InitCarAudio()
+    {
+        if (carEngineAS == null)
+        {
+            carEngineAS = GetComponent<AudioSource>();
+            if (carEngineAS == null)
+                return;
+        }
+
+        if (carEngineAS.clip == null)
+            return;
+
+        carEngineAS.loop = true;
+        carEngineAS.playOnAwake = false;
+        originalVolume = 0.6f;
+        carEngineAS.volume = originalVolume;
+
+        carEngineAS.Play();
+        audioInitialized = true;
     }
 
     void Update()
     {
-        //Rotate car model when 'turning'
         gameModel.transform.rotation = Quaternion.Euler(0, rb.velocity.x * 5, 0);
 
-        // Реальная скорость в км/ч
-        float speedKmh = GetComponent<Rigidbody>().velocity.magnitude * 3.6f;
-
-        if (speedKmh > 5) // Логируем только когда едем
+        if (isCrashed && carEngineAS != null && carEngineAS.isPlaying)
         {
-            Debug.Log($"Скорость: {speedKmh:F0} км/ч | Вперед/назад: {Input.GetAxis("Vertical"):F2}");
+            carEngineAS.Stop();
         }
 
-        // Отладка поворота
-        float turn = Input.GetAxis("Horizontal");
-        if (Mathf.Abs(turn) > 0.1f)
-        {
-            Debug.Log($"Поворот: {turn:F2}, угол машины: {transform.eulerAngles.y:F1}");
-        }
+        UpdateCarAudio();
     }
 
     private void FixedUpdate()
     {
-        //Apply Acceleration
+        if (isCrashed)
+            return;
+
         if (input.y > 0)
         {
             Accelerate();
@@ -58,7 +96,6 @@ public class CarHandler : MonoBehaviour
         else
             rb.drag = 0.2f;
 
-        //Apply Brakes
         if (input.y < 0)
         {
             Brake();
@@ -66,8 +103,6 @@ public class CarHandler : MonoBehaviour
 
         Steer();
 
-        //Force the car not to go backwards - ИСПРАВЛЕНО
-        // Теперь блокируется только движение НАЗАД, а не вперёд
         if (rb.velocity.z < 0)
             rb.velocity = new Vector3(rb.velocity.x, 0, 0);
     }
@@ -76,7 +111,6 @@ public class CarHandler : MonoBehaviour
     {
         rb.drag = 0;
 
-        //Stay within the speed limit
         if (rb.velocity.z >= maxForwardVelocity)
             return;
 
@@ -85,11 +119,8 @@ public class CarHandler : MonoBehaviour
 
     void Brake()
     {
-        //Don't brake unless we are going forward
         if (rb.velocity.z <= 0)
-        {
             return;
-        }
 
         rb.AddForce(rb.transform.forward * breakstionMultiplier * input.y);
     }
@@ -98,25 +129,116 @@ public class CarHandler : MonoBehaviour
     {
         if (Mathf.Abs(input.x) > 0)
         {
-            //Move the car sideways
             float speedBaseSteerLimit = rb.velocity.z / 5.0f;
             speedBaseSteerLimit = Mathf.Clamp01(speedBaseSteerLimit);
 
             rb.AddForce(rb.transform.right * steeringMultiplier * input.x * speedBaseSteerLimit);
 
-            //Normalize the X Velocity
             float normalizedX = rb.velocity.x / maxSteerVelocity;
-
-            //Ensure that we don't allow it to get bigger than 1 in magnitued
             normalizedX = Mathf.Clamp(normalizedX, -1.0f, 1.0f);
-
-            //Make sure we stay within the turn speed limit
             rb.velocity = new Vector3(normalizedX * maxSteerVelocity, 0, rb.velocity.z);
         }
         else
         {
-            //Auto center car
             rb.velocity = Vector3.Lerp(rb.velocity, new Vector3(0, 0, rb.velocity.z), Time.fixedDeltaTime * 3);
+        }
+    }
+
+    void UpdateCarAudio()
+    {
+        if (!isPlayer)
+            return;
+
+        if (isCrashed)
+        {
+            if (carEngineAS != null && carEngineAS.isPlaying)
+                carEngineAS.Stop();
+            return;
+        }
+
+        if (!audioInitialized || carEngineAS == null)
+            return;
+
+        if (!carEngineAS.isPlaying && carEngineAS.clip != null)
+            carEngineAS.Play();
+
+        float carMaxSpeedPercentage = Mathf.Clamp01(rb.velocity.z / maxForwardVelocity);
+
+        if (carPitchAnimationCurve != null && carPitchAnimationCurve.keys.Length > 0)
+            carEngineAS.pitch = carPitchAnimationCurve.Evaluate(carMaxSpeedPercentage);
+        else
+            carEngineAS.pitch = 0.7f + carMaxSpeedPercentage * 0.8f;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        // Игнорируем триггеры
+        if (collision.collider.isTrigger)
+            return;
+
+        // Игнорируем себя
+        if (collision.gameObject == gameObject)
+            return;
+
+        // Уже в аварии
+        if (isCrashed)
+            return;
+
+        // ========== ИГНОРИРУЕМ СТЕНЫ ==========
+        // По тегу
+        if (collision.gameObject.CompareTag("Wall"))
+            return;
+
+        // По имени (если нет тега)
+        if (collision.gameObject.name.Contains("Cube") ||
+            collision.gameObject.name.Contains("Wall") ||
+            collision.gameObject.name.Contains("Barrier"))
+            return;
+
+        // Игнорируем дорогу (если нужно)
+        if (collision.gameObject.CompareTag("Road"))
+            return;
+        // =====================================
+
+        float crashSpeed = collision.relativeVelocity.magnitude;
+
+        if (crashSpeed > crashSpeedThreshold)
+            Crash();
+    }
+
+    void Crash()
+    {
+        if (isCrashed) return;
+
+        isCrashed = true;
+
+        if (rb != null)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+
+        if (carEngineAS != null)
+        {
+            carEngineAS.Stop();
+            carEngineAS.enabled = false;
+            carEngineAS.volume = 0f;
+        }
+
+        this.enabled = false;
+    }
+
+    public void RepairCar()
+    {
+        isCrashed = false;
+        this.enabled = true;
+
+        if (isPlayer && carEngineAS != null)
+        {
+            carEngineAS.enabled = true;
+            carEngineAS.volume = originalVolume;
+            carEngineAS.Play();
+            audioInitialized = true;
         }
     }
 
@@ -130,6 +252,7 @@ public class CarHandler : MonoBehaviour
     {
         maxForwardVelocity = speed;
     }
+
     public float GetMaxSpeed()
     {
         return maxForwardVelocity;
@@ -138,5 +261,19 @@ public class CarHandler : MonoBehaviour
     public float GetCurrentSpeed()
     {
         return rb.velocity.z;
+    }
+
+    public bool IsCrashed()
+    {
+        return isCrashed;
+    }
+    public void StopCarAudio()
+    {
+        if (carEngineAS != null)
+        {
+            carEngineAS.Stop();
+            carEngineAS.enabled = false;
+            carEngineAS.volume = 0f;
+        }
     }
 }
