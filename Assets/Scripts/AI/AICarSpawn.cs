@@ -170,10 +170,7 @@ public class AICarSpawn : MonoBehaviour
         if (Time.time < nextSpawnTime)
             return;
 
-        // Определяем, сколько машин спавнить сейчас
         int carsToSpawn = currentCarsPerSpawn;
-
-        // Дополнительная проверка: если свободных машин мало - спавним меньше
         int freeCars = GetFreeCarsCount();
         carsToSpawn = Mathf.Min(carsToSpawn, freeCars);
 
@@ -183,11 +180,9 @@ public class AICarSpawn : MonoBehaviour
             return;
         }
 
-        // Создаём список полос для спавна (без повторений в одном цикле)
         List<int> usedLanesThisCycle = new List<int>();
         int spawnedThisCycle = 0;
 
-        // Сначала выбираем лучшие полосы (с наименьшим количеством спавнов)
         List<int> sortedLanes = new List<int>();
         for (int i = 0; i < laneCenters.Length; i++)
             sortedLanes.Add(i);
@@ -210,17 +205,35 @@ public class AICarSpawn : MonoBehaviour
                 if (carToSpawn == null)
                     break;
 
-                // Небольшой случайный сдвиг по Z для разнообразия
                 float zOffset = Random.Range(-3f, 3f);
+
+                bool isTruck = carToSpawn.CompareTag("Truck");
+                float spawnY = playerCarTransform.position.y;
+
+                if (isTruck)
+                    spawnY += 0.25f;
 
                 Vector3 spawnPos = new Vector3(
                     laneX,
-                    playerCarTransform.position.y,
+                    spawnY,
                     playerCarTransform.position.z + spawnDistance + zOffset
                 );
 
                 carToSpawn.transform.position = spawnPos;
                 carToSpawn.transform.rotation = Quaternion.identity;
+              
+
+                // ========== УСТАНОВКА НАЧАЛЬНОЙ СКОРОСТИ ==========
+                Rigidbody carRb = carToSpawn.GetComponent<Rigidbody>();
+                CarHandler carHandlerScript = carToSpawn.GetComponent<CarHandler>();
+
+                if (carRb != null && carHandlerScript != null)
+                {
+                    float targetSpeed = carHandlerScript.GetMaxSpeed();
+                    carRb.velocity = new Vector3(0, 0, targetSpeed);
+                }
+                // =================================================
+
                 carToSpawn.SetActive(true);
 
                 spawnedThisCycle++;
@@ -232,10 +245,7 @@ public class AICarSpawn : MonoBehaviour
 
         if (spawnedThisCycle > 0)
         {
-            // Фиксированный интервал для равномерного спавна
             nextSpawnTime = Time.time + currentSpawnInterval;
-
-            // Периодически выводим статистику спавна
             if (totalSpawns % 20 == 0)
             {
                 Debug.Log($"Статистика спавна по полосам: L1={laneSpawnCounts[0]}, L2={laneSpawnCounts[1]}, L3={laneSpawnCounts[2]}, L4={laneSpawnCounts[3]}");
@@ -243,7 +253,6 @@ public class AICarSpawn : MonoBehaviour
         }
         else
         {
-            // Если не удалось заспавнить, пробуем через короткое время
             nextSpawnTime = Time.time + 0.3f;
         }
     }

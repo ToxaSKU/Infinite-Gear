@@ -356,6 +356,7 @@ GameObject:
   - component: {fileID: -2807371585117645118}
   - component: {fileID: -8972318049032716673}
   - component: {fileID: 5789326206727239687}
+  - component: {fileID: -3507451993701495130}
   m_Layer: 6
   m_Name: Car AI PF
   m_TagString: CarAI
@@ -451,11 +452,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carHandler: {fileID: -1429207641843938046}
-  meshCollider: {fileID: -8972318049032716673}
-  targetFollowDistance: 8
-  minBrakeDistance: 4
-  emergencyDistance: 2
-  maxSpeed: 8
+  fixedSpeed: 10
+  useFixedSpeed: 1
   checkInterval: 0.1
 --- !u!114 &-1429207641843938046
 MonoBehaviour:
@@ -471,6 +469,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 5789326206727239687}
   gameModel: {fileID: 6133344745114580260}
+  carEngineAS: {fileID: 0}
+  carPitchAnimationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  crashSpeedThreshold: 3
+  crashAudioFadeTime: 0.5
+  useSpeedProgression: 1
+  startMaxSpeed: 15
+  finalMaxSpeed: 35
+  timeToReachMaxSpeed: 120
+  speedProgressionCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  enableMinSpeed: 1
+  minSpeed: 12
+  increaseMinSpeedOverTime: 1
+  finalMinSpeed: 25
 --- !u!114 &-2807371585117645118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -533,3 +572,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!114 &-3507451993701495130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6797572448018526110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 842aab1a5c57d1248a0cd86d71ca68c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wheels:
+  - {fileID: 3426262824952233103}
+  - {fileID: 6119717661042638123}
+  - {fileID: 3570998105131395352}
+  - {fileID: 7969384709066102038}
+  maxRotationSpeed: 2500
+  maxSpeedForRotation: 30
