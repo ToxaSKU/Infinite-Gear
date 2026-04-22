@@ -23,6 +23,19 @@ public class CarHandler : MonoBehaviour
     [SerializeField]
     float crashAudioFadeTime = 0.5f;
 
+    [Header("Speed Progression")]
+    [SerializeField] bool useSpeedProgression = true;
+    [SerializeField] float startMaxSpeed = 15f;
+    [SerializeField] float finalMaxSpeed = 35f;
+    [SerializeField] float timeToReachMaxSpeed = 120f;
+    [SerializeField] AnimationCurve speedProgressionCurve = AnimationCurve.Linear(0, 0, 1, 1);
+
+    [Header("Minimum Speed (Anti-Stuck)")]
+    [SerializeField] bool enableMinSpeed = true;
+    [SerializeField] float minSpeed = 12f;           // Минимальная скорость 43 км/ч
+    [SerializeField] bool increaseMinSpeedOverTime = true; // Увеличивать мин. скорость со временем
+    [SerializeField] float finalMinSpeed = 25f;       // Конечная минимальная скорость (90 км/ч)
+
     //Max values
     float maxSteerVelocity = 12;
     float maxForwardVelocity = 20;
@@ -40,6 +53,10 @@ public class CarHandler : MonoBehaviour
     private bool isCrashed = false;
     private float originalVolume;
 
+    private float gameStartTime;
+    private float currentMaxSpeed;
+    private float currentMinSpeed;
+
     void Start()
     {
         gameModel.transform.localRotation = Quaternion.identity;
@@ -48,7 +65,44 @@ public class CarHandler : MonoBehaviour
         if (isPlayer)
         {
             InitCarAudio();
+            gameStartTime = Time.time;
+            UpdateMaxSpeed();
+            currentMinSpeed = minSpeed;
         }
+    }
+
+    void Update()
+    {
+        gameModel.transform.rotation = Quaternion.Euler(0, rb.velocity.x * 5, 0);
+
+        if (isCrashed && carEngineAS != null && carEngineAS.isPlaying)
+        {
+            carEngineAS.Stop();
+        }
+
+        if (isPlayer && useSpeedProgression && !isCrashed)
+        {
+            UpdateMaxSpeed();
+
+            // Увеличиваем минимальную скорость со временем
+            if (increaseMinSpeedOverTime)
+            {
+                float elapsedTime = Time.time - gameStartTime;
+                float t = Mathf.Clamp01(elapsedTime / timeToReachMaxSpeed);
+                currentMinSpeed = Mathf.Lerp(minSpeed, finalMinSpeed, t);
+            }
+        }
+
+        UpdateCarAudio();
+    }
+
+    void UpdateMaxSpeed()
+    {
+        float elapsedTime = Time.time - gameStartTime;
+        float t = Mathf.Clamp01(elapsedTime / timeToReachMaxSpeed);
+        float curveValue = speedProgressionCurve.Evaluate(t);
+        currentMaxSpeed = Mathf.Lerp(startMaxSpeed, finalMaxSpeed, curveValue);
+        maxForwardVelocity = currentMaxSpeed;
     }
 
     void InitCarAudio()
@@ -72,22 +126,17 @@ public class CarHandler : MonoBehaviour
         audioInitialized = true;
     }
 
-    void Update()
-    {
-        gameModel.transform.rotation = Quaternion.Euler(0, rb.velocity.x * 5, 0);
-
-        if (isCrashed && carEngineAS != null && carEngineAS.isPlaying)
-        {
-            carEngineAS.Stop();
-        }
-
-        UpdateCarAudio();
-    }
-
     private void FixedUpdate()
     {
         if (isCrashed)
             return;
+
+        // ========== ПРИНУДИТЕЛЬНАЯ МИНИМАЛЬНАЯ СКОРОСТЬ ==========
+        if (isPlayer && enableMinSpeed && rb.velocity.z < currentMinSpeed)
+        {
+            // Не даём упасть ниже минимальной скорости
+            rb.velocity = new Vector3(rb.velocity.x, 0, currentMinSpeed);
+        }
 
         if (input.y > 0)
         {
@@ -119,6 +168,10 @@ public class CarHandler : MonoBehaviour
 
     void Brake()
     {
+        // Если достигли минимальной скорости - тормоз не работает
+        if (isPlayer && enableMinSpeed && rb.velocity.z <= currentMinSpeed)
+            return;
+
         if (rb.velocity.z <= 0)
             return;
 
@@ -172,33 +225,25 @@ public class CarHandler : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Игнорируем триггеры
         if (collision.collider.isTrigger)
             return;
 
-        // Игнорируем себя
         if (collision.gameObject == gameObject)
             return;
 
-        // Уже в аварии
         if (isCrashed)
             return;
 
-        // ========== ИГНОРИРУЕМ СТЕНЫ ==========
-        // По тегу
         if (collision.gameObject.CompareTag("Wall"))
             return;
 
-        // По имени (если нет тега)
         if (collision.gameObject.name.Contains("Cube") ||
             collision.gameObject.name.Contains("Wall") ||
             collision.gameObject.name.Contains("Barrier"))
             return;
 
-        // Игнорируем дорогу (если нужно)
         if (collision.gameObject.CompareTag("Road"))
             return;
-        // =====================================
 
         float crashSpeed = collision.relativeVelocity.magnitude;
 
@@ -267,6 +312,7 @@ public class CarHandler : MonoBehaviour
     {
         return isCrashed;
     }
+
     public void StopCarAudio()
     {
         if (carEngineAS != null)
@@ -276,4 +322,10 @@ public class CarHandler : MonoBehaviour
             carEngineAS.volume = 0f;
         }
     }
+
+    public float GetCurrentMinSpeed()
+    {
+        return currentMinSpeed;
+    }
+    
 }
