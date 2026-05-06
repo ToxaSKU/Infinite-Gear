@@ -87,11 +87,7 @@ public class OvertakeSound : MonoBehaviour
             // 3. Скорость игрока выше
             if (distanceZ < 2f && distanceZ > -8f && distanceX < maxSideDistance && speedDiff > 2f)
             {
-<<<<<<< HEAD
                 Debug.Log($"Обгон! {car.name} | Speed diff: {speedDiff:F1}");
-=======
-                Debug.Log($"OVERTAKE! {car.name} | Speed diff: {speedDiff:F1}");
->>>>>>> 1967106d167c6fee752b6db6ea748039b41e6717
                 PlayOvertake(carId);
                 break;
             }
