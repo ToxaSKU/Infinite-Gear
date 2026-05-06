@@ -75,9 +75,15 @@ public class ScoreManager : MonoBehaviour
         if (overtakeText != null)
         {
             if (currentCombo > 1)
+<<<<<<< HEAD
+                overtakeText.text = $"ÎÁÃÎÍ! +{pointsPerOvertake} x{currentCombo} ÊÎÌÁÎ!";
+            else
+                overtakeText.text = $"ÎÁÃÎÍ! +{pointsPerOvertake}";
+=======
                 overtakeText.text = $"OVERTAKE! +{pointsPerOvertake} x{currentCombo} COMBO!";
             else
                 overtakeText.text = $"OVERTAKE! +{pointsPerOvertake}";
+>>>>>>> 1967106d167c6fee752b6db6ea748039b41e6717
 
             Invoke(nameof(ClearOvertakeText), 1f);
         }
@@ -92,6 +98,17 @@ public class ScoreManager : MonoBehaviour
     void UpdateUI()
     {
         if (distanceText != null)
+<<<<<<< HEAD
+            distanceText.text = $"Äèñòàíöèÿ: {totalDistance:F0}m";
+
+        if (scoreText != null)
+            scoreText.text = $"Ñ÷¸ò: {totalScore:F0}";
+
+        if (overtakeText != null && currentCombo > 1 && overtakeText.text == "")
+            overtakeText.text = $"Îáãîíû: {overtakeCount} | x{currentCombo} ÊÎÌÁÎ!";
+        else if (overtakeText != null && overtakeText.text == "")
+            overtakeText.text = $"Îáãîíû: {overtakeCount}";
+=======
             distanceText.text = $"Distance: {totalDistance:F0}m";
 
         if (scoreText != null)
@@ -101,6 +118,7 @@ public class ScoreManager : MonoBehaviour
             overtakeText.text = $"Overtakes: {overtakeCount} | x{currentCombo} COMBO!";
         else if (overtakeText != null && overtakeText.text == "")
             overtakeText.text = $"Overtakes: {overtakeCount}";
+>>>>>>> 1967106d167c6fee752b6db6ea748039b41e6717
     }
 
     public void GameOver()
@@ -108,7 +126,11 @@ public class ScoreManager : MonoBehaviour
         isGameActive = false;
 
         if (finalScoreText != null)
+<<<<<<< HEAD
+            finalScoreText.text = $"Ôèíàëüíûé ñ÷¸ò: {totalScore:F0}\nÄèñòàíöèÿ: {totalDistance:F0}m\nÎáãîíû: {overtakeCount}";
+=======
             finalScoreText.text = $"Final Score: {totalScore:F0}\nDistance: {totalDistance:F0}m\nOvertakes: {overtakeCount}";
+>>>>>>> 1967106d167c6fee752b6db6ea748039b41e6717
     }
 
     public float GetTotalScore()

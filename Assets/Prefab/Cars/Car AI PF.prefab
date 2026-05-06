@@ -355,6 +355,7 @@ GameObject:
   - component: {fileID: -1429207641843938046}
   - component: {fileID: -2807371585117645118}
   - component: {fileID: -8972318049032716673}
+  - component: {fileID: 7273541087924400130}
   - component: {fileID: 5789326206727239687}
   - component: {fileID: -3507451993701495130}
   m_Layer: 6
@@ -545,6 +546,25 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5495902117074765545, guid: df73175596f96734a9c7906a63365451, type: 3}
+--- !u!114 &7273541087924400130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6797572448018526110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdc36eab9355c294084a06212543eedc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wheels:
+  - {fileID: 3426262824952233103}
+  - {fileID: 6119717661042638123}
+  - {fileID: 3570998105131395352}
+  - {fileID: 7969384709066102038}
+  maxRotationSpeed: 7200
+  maxSpeedForRotation: 30
 --- !u!54 &5789326206727239687
 Rigidbody:
   m_ObjectHideFlags: 0

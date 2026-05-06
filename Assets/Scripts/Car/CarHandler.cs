@@ -32,9 +32,15 @@ public class CarHandler : MonoBehaviour
 
     [Header("Minimum Speed (Anti-Stuck)")]
     [SerializeField] bool enableMinSpeed = true;
+<<<<<<< HEAD
+    [SerializeField] float minSpeed = 12f;
+    [SerializeField] bool increaseMinSpeedOverTime = true;
+    [SerializeField] float finalMinSpeed = 25f;
+=======
     [SerializeField] float minSpeed = 12f;           // Минимальная скорость 43 км/ч
     [SerializeField] bool increaseMinSpeedOverTime = true; // Увеличивать мин. скорость со временем
     [SerializeField] float finalMinSpeed = 25f;       // Конечная минимальная скорость (90 км/ч)
+>>>>>>> 1967106d167c6fee752b6db6ea748039b41e6717
 
     //Max values
     float maxSteerVelocity = 12;
@@ -84,7 +90,10 @@ public class CarHandler : MonoBehaviour
         {
             UpdateMaxSpeed();
 
+<<<<<<< HEAD
+=======
             // Увеличиваем минимальную скорость со временем
+>>>>>>> 1967106d167c6fee752b6db6ea748039b41e6717
             if (increaseMinSpeedOverTime)
             {
                 float elapsedTime = Time.time - gameStartTime;
@@ -131,10 +140,15 @@ public class CarHandler : MonoBehaviour
         if (isCrashed)
             return;
 
+<<<<<<< HEAD
+        if (isPlayer && enableMinSpeed && rb.velocity.z < currentMinSpeed)
+        {
+=======
         // ========== ПРИНУДИТЕЛЬНАЯ МИНИМАЛЬНАЯ СКОРОСТЬ ==========
         if (isPlayer && enableMinSpeed && rb.velocity.z < currentMinSpeed)
         {
             // Не даём упасть ниже минимальной скорости
+>>>>>>> 1967106d167c6fee752b6db6ea748039b41e6717
             rb.velocity = new Vector3(rb.velocity.x, 0, currentMinSpeed);
         }
 
@@ -168,7 +182,10 @@ public class CarHandler : MonoBehaviour
 
     void Brake()
     {
+<<<<<<< HEAD
+=======
         // Если достигли минимальной скорости - тормоз не работает
+>>>>>>> 1967106d167c6fee752b6db6ea748039b41e6717
         if (isPlayer && enableMinSpeed && rb.velocity.z <= currentMinSpeed)
             return;
 
@@ -322,10 +339,13 @@ public class CarHandler : MonoBehaviour
             carEngineAS.volume = 0f;
         }
     }
+<<<<<<< HEAD
+=======
 
     public float GetCurrentMinSpeed()
     {
         return currentMinSpeed;
     }
     
+>>>>>>> 1967106d167c6fee752b6db6ea748039b41e6717
 }

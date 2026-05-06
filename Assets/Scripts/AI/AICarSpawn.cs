@@ -221,7 +221,11 @@ public class AICarSpawn : MonoBehaviour
 
                 carToSpawn.transform.position = spawnPos;
                 carToSpawn.transform.rotation = Quaternion.identity;
+<<<<<<< HEAD
+
+=======
               
+>>>>>>> 1967106d167c6fee752b6db6ea748039b41e6717
 
                 // ========== УСТАНОВКА НАЧАЛЬНОЙ СКОРОСТИ ==========
                 Rigidbody carRb = carToSpawn.GetComponent<Rigidbody>();
