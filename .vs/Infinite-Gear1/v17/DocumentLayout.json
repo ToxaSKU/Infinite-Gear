@@ -1,0 +1,102 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\anton\\Desktop\\Infinite-Gear1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E6E37CE1-8AF4-7FA5-040C-D93E3B2B642A}|Assembly-CSharp.csproj|c:\\users\\anton\\desktop\\infinite-gear1\\assets\\scripts\\endless\\endless.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E6E37CE1-8AF4-7FA5-040C-D93E3B2B642A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\endless\\endless.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E6E37CE1-8AF4-7FA5-040C-D93E3B2B642A}|Assembly-CSharp.csproj|c:\\users\\anton\\desktop\\infinite-gear1\\assets\\scripts\\endless\\endlesslevel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E6E37CE1-8AF4-7FA5-040C-D93E3B2B642A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\endless\\endlesslevel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E6E37CE1-8AF4-7FA5-040C-D93E3B2B642A}|Assembly-CSharp.csproj|C:\\Users\\anton\\Desktop\\Infinite-Gear1\\assets\\scripts\\car\\carhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E6E37CE1-8AF4-7FA5-040C-D93E3B2B642A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\car\\carhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E6E37CE1-8AF4-7FA5-040C-D93E3B2B642A}|Assembly-CSharp.csproj|C:\\Users\\anton\\Desktop\\Infinite-Gear1\\assets\\scripts\\ai\\aihendler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E6E37CE1-8AF4-7FA5-040C-D93E3B2B642A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ai\\aihendler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E6E37CE1-8AF4-7FA5-040C-D93E3B2B642A}|Assembly-CSharp.csproj|C:\\Users\\anton\\Desktop\\Infinite-Gear1\\assets\\scripts\\ai\\aicarspawn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E6E37CE1-8AF4-7FA5-040C-D93E3B2B642A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ai\\aicarspawn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Endless.cs",
+              "DocumentMoniker": "C:\\Users\\anton\\Desktop\\Infinite-Gear1\\Assets\\Scripts\\Endless\\Endless.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Endless\\Endless.cs",
+              "ToolTip": "C:\\Users\\anton\\Desktop\\Infinite-Gear1\\Assets\\Scripts\\Endless\\Endless.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Endless\\Endless.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAwwBYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-20T18:10:37.772Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EndlessLevel.cs",
+              "DocumentMoniker": "C:\\Users\\anton\\Desktop\\Infinite-Gear1\\Assets\\Scripts\\Endless\\EndlessLevel.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Endless\\EndlessLevel.cs",
+              "ToolTip": "C:\\Users\\anton\\Desktop\\Infinite-Gear1\\Assets\\Scripts\\Endless\\EndlessLevel.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Endless\\EndlessLevel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-20T18:10:29.974Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CarHandler.cs",
+              "DocumentMoniker": "C:\\Users\\anton\\Desktop\\Infinite-Gear1\\Assets\\Scripts\\Car\\CarHandler.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Car\\CarHandler.cs",
+              "ToolTip": "C:\\Users\\anton\\Desktop\\Infinite-Gear1\\Assets\\Scripts\\Car\\CarHandler.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Car\\CarHandler.cs",
+              "ViewState": "AgIAAHYAAAAAAAAAAAAiwGAAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-20T18:07:46.155Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AIHendler.cs",
+              "DocumentMoniker": "C:\\Users\\anton\\Desktop\\Infinite-Gear1\\Assets\\Scripts\\AI\\AIHendler.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\AI\\AIHendler.cs",
+              "ToolTip": "C:\\Users\\anton\\Desktop\\Infinite-Gear1\\Assets\\Scripts\\AI\\AIHendler.cs",
+              "RelativeToolTip": "Assets\\Scripts\\AI\\AIHendler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-20T18:07:36.81Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AICarSpawn.cs",
+              "DocumentMoniker": "C:\\Users\\anton\\Desktop\\Infinite-Gear1\\Assets\\Scripts\\AI\\AICarSpawn.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\AI\\AICarSpawn.cs",
+              "ToolTip": "C:\\Users\\anton\\Desktop\\Infinite-Gear1\\Assets\\Scripts\\AI\\AICarSpawn.cs*",
+              "RelativeToolTip": "Assets\\Scripts\\AI\\AICarSpawn.cs*",
+              "ViewState": "AgIAAGUBAAAAAAAAAAAAAGEBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-19T13:38:06.577Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

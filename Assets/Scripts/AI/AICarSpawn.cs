@@ -12,8 +12,8 @@ public class AICarSpawn : MonoBehaviour
     private GameObject[] carAIPool;
 
     [Header("Spawn Timing")]
-    [SerializeField] float spawnInterval = 0.8f;  // Фиксированный интервал вместо случайного
-    [SerializeField] int carsPerSpawn = 2;  // Количество машин за спавн
+    [SerializeField] float spawnInterval = 0.8f;
+    [SerializeField] int carsPerSpawn = 2;
 
     [Header("Spawn Distances")]
     [SerializeField] float spawnDistance = 80f;
@@ -30,7 +30,12 @@ public class AICarSpawn : MonoBehaviour
 
     [Header("Traffic Density")]
     [SerializeField] float trafficDensity = 0.8f;
-    [SerializeField] float densityAdjustSpeed = 0.05f;  // Скорость подстройки плотности
+    [SerializeField] float densityAdjustSpeed = 0.05f;
+    [SerializeField] bool useSpeedBasedDensity = true;
+    [SerializeField] float minSpeedForDensity = 15f;
+    [SerializeField] float maxSpeedForDensity = 35f;
+    [SerializeField] float minTrafficDensity = 0.4f;
+    [SerializeField] float maxTrafficDensity = 1.2f;
 
     [Header("Distance Between Cars")]
     [SerializeField] float minDistanceBetweenCars = 8f;
@@ -41,11 +46,12 @@ public class AICarSpawn : MonoBehaviour
     private Collider[] overlappedCheckCollider = new Collider[3];
 
     private Transform playerCarTransform;
+    private CarHandler playerCarHandler;
     private float nextSpawnTime = 0;
     private WaitForSeconds wait = new WaitForSeconds(0.1f);
 
     private float[] laneCenters = new float[4];
-    private int[] laneSpawnCounts = new int[4];  // Счётчик спавнов на каждой полосе
+    private int[] laneSpawnCounts = new int[4];
     private int totalSpawns = 0;
 
     private float currentSpawnInterval;
@@ -71,6 +77,7 @@ public class AICarSpawn : MonoBehaviour
             return;
         }
         playerCarTransform = player.transform;
+        playerCarHandler = player.GetComponent<CarHandler>();
 
         carAIPool = new GameObject[poolSize];
         if (carAIPrefabs.Length == 0)
@@ -102,23 +109,46 @@ public class AICarSpawn : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(2f);
 
-            int activeCars = GetActiveCarsCount();
-            float currentDensity = (float)activeCars / poolSize;
-
-            // Плавно подстраиваем интервал спавна под целевую плотность
-            if (currentDensity < trafficDensity)
+            if (useSpeedBasedDensity && playerCarHandler != null)
             {
-                // Мало машин - спавним чаще
-                currentSpawnInterval = Mathf.Max(0.3f, currentSpawnInterval - densityAdjustSpeed);
-                currentCarsPerSpawn = Mathf.Min(carsPerSpawn + 1, 3);
+                float currentPlayerSpeed = Mathf.Abs(playerCarHandler.GetCurrentSpeed());
+
+                float t = Mathf.Clamp01((currentPlayerSpeed - minSpeedForDensity) / (maxSpeedForDensity - minSpeedForDensity));
+                float targetDensity = Mathf.Lerp(minTrafficDensity, maxTrafficDensity, t);
+
+                if (targetDensity > trafficDensity)
+                {
+                    currentSpawnInterval = Mathf.Max(0.3f, currentSpawnInterval - densityAdjustSpeed);
+                    currentCarsPerSpawn = Mathf.Min(carsPerSpawn + 1, 4);
+                }
+                else if (targetDensity < trafficDensity)
+                {
+                    currentSpawnInterval = Mathf.Min(1.5f, currentSpawnInterval + densityAdjustSpeed);
+                    currentCarsPerSpawn = Mathf.Max(1, carsPerSpawn - 1);
+                }
+
+                trafficDensity = targetDensity;
+
+                if (totalSpawns % 10 == 0)
+                    Debug.Log($"Скорость: {currentPlayerSpeed:F0}, плотность: {targetDensity:F2}, интервал: {currentSpawnInterval:F2}");
             }
-            else if (currentDensity > trafficDensity)
+            else
             {
-                // Много машин - спавним реже
-                currentSpawnInterval = Mathf.Min(1.5f, currentSpawnInterval + densityAdjustSpeed);
-                currentCarsPerSpawn = Mathf.Max(1, carsPerSpawn - 1);
+                int activeCars = GetActiveCarsCount();
+                float currentDensity = (float)activeCars / poolSize;
+
+                if (currentDensity < trafficDensity)
+                {
+                    currentSpawnInterval = Mathf.Max(0.3f, currentSpawnInterval - densityAdjustSpeed);
+                    currentCarsPerSpawn = Mathf.Min(carsPerSpawn + 1, 3);
+                }
+                else if (currentDensity > trafficDensity)
+                {
+                    currentSpawnInterval = Mathf.Min(1.5f, currentSpawnInterval + densityAdjustSpeed);
+                    currentCarsPerSpawn = Mathf.Max(1, carsPerSpawn - 1);
+                }
             }
         }
     }
@@ -141,28 +171,6 @@ public class AICarSpawn : MonoBehaviour
             SpawnMultipleCars();
             yield return wait;
         }
-    }
-
-    // Выбирает следующую полосу для спавна (Round-Robin)
-    int GetNextLaneIndex()
-    {
-        if (totalSpawns == 0)
-            return Random.Range(0, laneCenters.Length);
-
-        // Находим полосу с наименьшим количеством спавнов
-        int minIndex = 0;
-        int minCount = laneSpawnCounts[0];
-
-        for (int i = 1; i < laneSpawnCounts.Length; i++)
-        {
-            if (laneSpawnCounts[i] < minCount)
-            {
-                minCount = laneSpawnCounts[i];
-                minIndex = i;
-            }
-        }
-
-        return minIndex;
     }
 
     void SpawnMultipleCars()
@@ -222,8 +230,6 @@ public class AICarSpawn : MonoBehaviour
                 carToSpawn.transform.position = spawnPos;
                 carToSpawn.transform.rotation = Quaternion.identity;
 
-
-                // ========== УСТАНОВКА НАЧАЛЬНОЙ СКОРОСТИ ==========
                 Rigidbody carRb = carToSpawn.GetComponent<Rigidbody>();
                 CarHandler carHandlerScript = carToSpawn.GetComponent<CarHandler>();
 
@@ -232,7 +238,6 @@ public class AICarSpawn : MonoBehaviour
                     float targetSpeed = carHandlerScript.GetMaxSpeed();
                     carRb.velocity = new Vector3(0, 0, targetSpeed);
                 }
-                // =================================================
 
                 carToSpawn.SetActive(true);
 
@@ -284,7 +289,6 @@ public class AICarSpawn : MonoBehaviour
     {
         float spawnZ = playerCarTransform.position.z + spawnDistance;
 
-        // Проверяем дистанцию до других машин на этой полосе
         foreach (GameObject car in carAIPool)
         {
             if (!car.activeInHierarchy) continue;
@@ -295,11 +299,9 @@ public class AICarSpawn : MonoBehaviour
                 return false;
         }
 
-        // Проверка дистанции до игрока
         if (Mathf.Abs(playerCarTransform.position.z - spawnZ) < minDistanceBetweenCars)
             return false;
 
-        // Проверка физическим боксом
         Vector3 checkPos = new Vector3(laneX, playerCarTransform.position.y, spawnZ);
         if (Physics.OverlapBoxNonAlloc(checkPos, Vector3.one * 2f, overlappedCheckCollider, Quaternion.identity, otherCarsLayerMask) > 0)
             return false;
@@ -315,8 +317,7 @@ public class AICarSpawn : MonoBehaviour
         {
             if (!car.activeInHierarchy) continue;
 
-            // Получаем реальную позицию модели (первый дочерний объект)
-            Transform modelTransform = car.transform.GetChild(0);
+            Transform modelTransform = car.transform.childCount > 0 ? car.transform.GetChild(0) : car.transform;
             float carZ = modelTransform != null ? modelTransform.position.z : car.transform.position.z;
 
             float distanceFromPlayer = carZ - playerCarTransform.position.z;

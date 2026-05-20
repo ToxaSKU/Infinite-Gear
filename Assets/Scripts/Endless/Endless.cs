@@ -4,56 +4,64 @@ using UnityEngine;
 
 public class Endless : MonoBehaviour
 {
+    // ========== НАСТРОЙКИ В ИНСПЕКТОРЕ ==========
+
     [SerializeField]
-    GameObject[] sectionsPrefabs;
+    GameObject[] sectionsPrefabs; // Массив префабов секций дороги (разные варианты)
 
-    GameObject[] sectionsPool = new GameObject[20];
+    // ========== ПРИВАТНЫЕ ПЕРЕМЕННЫЕ ==========
 
-    GameObject[] sections = new GameObject[10];
+    GameObject[] sectionsPool = new GameObject[20]; // Пул секций (всего 20)
+    GameObject[] sections = new GameObject[10]; // Активные секции (10 штук перед игроком)
 
-    Transform playerCarTransform;
+    Transform playerCarTransform; // Ссылка на трансформ машины игрока
 
-    WaitForSeconds waitFor100ms = new WaitForSeconds(0.1f);
+    WaitForSeconds waitFor100ms = new WaitForSeconds(0.1f); // Задержка 0.1 сек для корутины
 
-    const float sectionLength = 27;
+    const float sectionLength = 27; // Длина одной секции дороги (по оси Z)
 
-    // Start is called before the first frame update
+
+
     void Start()
     {
+        // Находим машину игрока по тегу
         playerCarTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
         int prefabIndex = 0;
 
-        //Create a pool for our endless sections
+
+        // Создаём 20 секций разных типов и прячем их (SetActive false)
         for (int i = 0; i < sectionsPool.Length; i++)
         {
             sectionsPool[i] = Instantiate(sectionsPrefabs[prefabIndex]);
-            sectionsPool[i].SetActive(false);
+            sectionsPool[i].SetActive(false); // Изначально выключена
 
             prefabIndex++;
 
-            //Loop the prefab index if we run out of prefabs
+            // Если закончились префабы - начинаем сначала
             if (prefabIndex > sectionsPrefabs.Length - 1)
                 prefabIndex = 0;
         }
 
-
+        // Создаём 10 активных секций, расположенных друг за другом
         for (int i = 0; i < sections.Length; i++)
         {
-            //Get a random section
+            // Берём случайную свободную секцию из пула
             GameObject randomSection = GetRandomSectionFromPool();
 
-            //Move it into position and set it to active
+            // Размещаем её: X берём из пула, Y = -10 (ниже камеры), Z = i * длина секции
             randomSection.transform.position = new Vector3(sectionsPool[i].transform.position.x, -10, i * sectionLength);
-            randomSection.SetActive(true);
+            randomSection.SetActive(true); // Включаем секцию
 
-            //Set the section in the array
+            // Сохраняем в массив активных секций
             sections[i] = randomSection;
         }
 
+        // Запускаем корутину обновления позиций секций
         StartCoroutine(UpdateLessonOfTenCO());
     }
 
+    // Корутина: каждые 0.1 секунды проверяем позиции секций
     IEnumerator UpdateLessonOfTenCO()
     {
         while (true)
@@ -63,48 +71,55 @@ public class Endless : MonoBehaviour
         }
     }
 
+    // Обновление позиций секций (бесконечная дорога)
     void UpdateSectionPositions()
     {
         for (int i = 0; i < sections.Length; i++)
         {
-            //Check if section is too far behind.
             if (sections[i].transform.position.z - playerCarTransform.position.z < -sectionLength)
             {
-                //Store the position of the section and disable it
+                // Запоминаем позицию старой секции
                 Vector3 lastSectionPosition = sections[i].transform.position;
+
+                // Выключаем старую секцию
                 sections[i].SetActive(false);
 
-                //Get new section & enable it & move it forward
+                // Берём новую случайную секцию из пула
                 sections[i] = GetRandomSectionFromPool();
 
-                //Move the new section into place and active it
-                sections[i].transform.position = new Vector3(lastSectionPosition.x, -10, lastSectionPosition.z + sectionLength * sections.Length);
+                // Перемещаем новую секцию в конец очереди (за последнюю активную секцию)
+                sections[i].transform.position = new Vector3(
+                    lastSectionPosition.x,
+                    -10,
+                    lastSectionPosition.z + sectionLength * sections.Length
+                );
+
+                // Включаем новую секцию
                 sections[i].SetActive(true);
             }
         }
     }
 
-
-
-
+    // Получение свободной (неактивной) секции из пула
     GameObject GetRandomSectionFromPool()
     {
-        //Pick a random index and hope that it is available
+        // Выбираем случайный индекс в пуле
         int randomIndex = Random.Range(0, sectionsPool.Length);
 
         bool isNewSectionFound = false;
 
+        // Ищем свободную секцию (которая не активна на сцене)
         while (!isNewSectionFound)
         {
-            //Check if the section is not active, in that case we've found a section
+            // Если секция не активна - нашли
             if (!sectionsPool[randomIndex].activeInHierarchy)
                 isNewSectionFound = true;
             else
             {
-                //If it was active we need to try to find another one so we increase the index
+                // Если секция активна - переходим к следующей
                 randomIndex++;
 
-                //Ensure that we loop around if we reach the end of the array
+                // Зацикливаем индекс (если дошли до конца - идём сначала)
                 if (randomIndex > sectionsPool.Length - 1)
                     randomIndex = 0;
             }
